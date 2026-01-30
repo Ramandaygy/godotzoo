@@ -1,0 +1,931 @@
+[gd_scene load_steps=8 format=3 uid="uid://lk1ilsk3kbby"]
+
+[ext_resource type="Script" uid="uid://b6nsmoh0vpxjb" path="res://Scripts/ui/progress.gd" id="1_48c3n"]
+[ext_resource type="Script" uid="uid://4poew4er7vdr" path="res://Scripts/ui/animal_card.gd" id="2_gpuup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgqpf"]
+bg_color = Color(0.37801012, 0.37801012, 0.37801012, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_gpuup"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2co20"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpuup"]
+bg_color = Color(0.33783564, 0.6771055, 0.54456353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2co20"]
+bg_color = Color(0.305, 0.61, 0.4930834, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Progress" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_48c3n")
+
+[node name="PaddingPage" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="MainContainer" type="VBoxContainer" parent="PaddingPage"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Header" type="HBoxContainer" parent="PaddingPage/MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="BackButton" type="TextureButton" parent="PaddingPage/MainContainer/Header"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PaddingPage/MainContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TITLE"
+horizontal_alignment = 1
+
+[node name="ProgressCard" type="PanelContainer" parent="PaddingPage/MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgqpf")
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ProgressCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ProgressCard/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CardTitle" type="Label" parent="PaddingPage/MainContainer/ProgressCard/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Progress Minggu ini"
+vertical_alignment = 1
+autowrap_trim_flags = 128
+
+[node name="WeeklyProgressBar" type="ProgressBar" parent="PaddingPage/MainContainer/ProgressCard/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 7.0
+value = 3.0
+
+[node name="ProgressText" type="Label" parent="PaddingPage/MainContainer/ProgressCard/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "3 dari 7 tugas selesai"
+
+[node name="TabBar" type="HBoxContainer" parent="PaddingPage/MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AnimalTabButton" type="Button" parent="PaddingPage/MainContainer/TabBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_gpuup")
+text = "Hewan
+"
+
+[node name="ZoneTabButton" type="Button" parent="PaddingPage/MainContainer/TabBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2co20")
+text = "Zona
+"
+
+[node name="ContentContainer" type="VBoxContainer" parent="PaddingPage/MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="AnimalView" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="AnimalGrid" type="GridContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 7
+
+[node name="AnimalCard" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_gpuup")
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard2" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard2"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard2/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard2/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard2/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard2/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard5" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard5"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard5/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard5/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard5/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard5/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard6" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard6"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard6/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard6/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard6/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard6/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard7" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard7"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard7/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard7/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard7/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard7/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard8" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard8"]
+layout_mode = 0
+offset_right = 124.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard8/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard8/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard8/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard8/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard9" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard9"]
+layout_mode = 0
+offset_right = 124.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard9/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard9/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard9/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard9/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard10" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard10"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard10/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard10/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard10/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard10/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard11" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard11"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard11/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard11/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard11/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard11/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard12" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard12"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard12/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard12/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard12/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard12/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard13" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard13"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard13/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard13/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard13/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard13/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard14" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard14"]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard14/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard14/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard14/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard14/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard3" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard3"]
+layout_mode = 0
+offset_right = 124.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard3/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard3/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard3/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard3/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="AnimalCard4" type="Button" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardPadding" type="MarginContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard4"]
+layout_mode = 0
+offset_right = 124.0
+offset_bottom = 140.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CardContent" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard4/CardPadding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard4/CardPadding/CardContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="AnimalName" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard4/CardPadding/CardContent"]
+layout_mode = 2
+text = "Jalak Bali"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="PaddingPage/MainContainer/ContentContainer/AnimalView/AnimalGrid/AnimalCard4/CardPadding/CardContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpuup")
+text = "Dipelakjari"
+horizontal_alignment = 1
+
+[node name="ZoneView" type="VBoxContainer" parent="PaddingPage/MainContainer/ContentContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DetailOverlay" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OverlayBg" type="ColorRect" parent="DetailOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.33, 0.33, 0.33, 1)
+
+[node name="DetailPanel" type="PanelContainer" parent="DetailOverlay"]
+custom_minimum_size = Vector2(320, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2co20")
+
+[node name="PanelPadding" type="MarginContainer" parent="DetailOverlay/DetailPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="PanelContent" type="VBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="AnimalImage" type="TextureRect" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/Header"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="HeaderText" type="VBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/Header"]
+layout_mode = 2
+
+[node name="AnimalTitle" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/Header/HeaderText"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Jalak Bali"
+
+[node name="AnimalLatin" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/Header/HeaderText"]
+layout_mode = 2
+text = "jawlakblal"
+
+[node name="ProgressCard" type="PanelContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard"]
+layout_mode = 2
+
+[node name="CardTitle" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="RowStatus" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowStatus"]
+layout_mode = 2
+text = "Status	   :"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowStatus"]
+layout_mode = 2
+text = "TELAH DIPELAJARI"
+
+[node name="RowDate" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowDate"]
+layout_mode = 2
+text = "Tanggal	   :"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowDate"]
+layout_mode = 2
+text = "21 Januari 2026
+"
+
+[node name="RowTime" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowTime"]
+layout_mode = 2
+text = "Waktu Belajar"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowTime"]
+layout_mode = 2
+text = "6 menit 40 detik"
+
+[node name="RowScore" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowScore"]
+layout_mode = 2
+text = "Quiz Terbaik"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/ProgressCard/VBoxContainer/RowScore"]
+layout_mode = 2
+text = "9/10 poin"
+
+[node name="KlasifikasiCard" type="PanelContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard"]
+layout_mode = 2
+
+[node name="CardTitle" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer"]
+layout_mode = 2
+text = "Klasifikasi"
+
+[node name="KingdomRow" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/KingdomRow"]
+layout_mode = 2
+text = "Kingdom"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/KingdomRow"]
+layout_mode = 2
+text = "Animalia"
+
+[node name="FilumRow" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/FilumRow"]
+layout_mode = 2
+text = "Filium"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/FilumRow"]
+layout_mode = 2
+text = "Chordata
+"
+
+[node name="KelasRow" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/KelasRow"]
+layout_mode = 2
+text = "Kelas"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/KelasRow"]
+layout_mode = 2
+text = "Mammalia"
+
+[node name="OrdoRow" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/OrdoRow"]
+layout_mode = 2
+text = "Ordo"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/OrdoRow"]
+layout_mode = 2
+text = "Carnivora"
+
+[node name="FamiliaRow" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/FamiliaRow"]
+layout_mode = 2
+text = "Famili"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KlasifikasiCard/VBoxContainer/FamiliaRow"]
+layout_mode = 2
+text = "Felidae"
+
+[node name="KarakteristikCard" type="PanelContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard"]
+layout_mode = 2
+
+[node name="CardTitle" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="RowStatus" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowStatus"]
+layout_mode = 2
+text = "Status	   :"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowStatus"]
+layout_mode = 2
+text = "TELAH DIPELAJARI"
+
+[node name="RowDate" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowDate"]
+layout_mode = 2
+text = "Tanggal	   :"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowDate"]
+layout_mode = 2
+text = "21 Januari 2026
+"
+
+[node name="RowTime" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowTime"]
+layout_mode = 2
+text = "Waktu Belajar"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowTime"]
+layout_mode = 2
+text = "6 menit 40 detik"
+
+[node name="RowScore" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowScore"]
+layout_mode = 2
+text = "Quiz Terbaik"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/KarakteristikCard/VBoxContainer/RowScore"]
+layout_mode = 2
+text = "9/10 poin"
+
+[node name="HabitatCard" type="PanelContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard"]
+layout_mode = 2
+
+[node name="CardTitle" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="RowStatus" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowStatus"]
+layout_mode = 2
+text = "Status	   :"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowStatus"]
+layout_mode = 2
+text = "TELAH DIPELAJARI"
+
+[node name="RowDate" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowDate"]
+layout_mode = 2
+text = "Tanggal	   :"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowDate"]
+layout_mode = 2
+text = "21 Januari 2026
+"
+
+[node name="RowTime" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowTime"]
+layout_mode = 2
+text = "Waktu Belajar"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowTime"]
+layout_mode = 2
+text = "6 menit 40 detik"
+
+[node name="RowScore" type="HBoxContainer" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLeft" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowScore"]
+layout_mode = 2
+text = "Quiz Terbaik"
+
+[node name="LabelRight" type="Label" parent="DetailOverlay/DetailPanel/PanelPadding/PanelContent/HabitatCard/VBoxContainer/RowScore"]
+layout_mode = 2
+text = "9/10 poin"
+
+[connection signal="toggled" from="PaddingPage/MainContainer/TabBar/AnimalTabButton" to="." method="_on_animal_tab_button_toggled"]
+[connection signal="toggled" from="PaddingPage/MainContainer/TabBar/ZoneTabButton" to="." method="_on_zona_tab_button_toggled"]

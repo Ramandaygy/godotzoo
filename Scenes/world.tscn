@@ -1,0 +1,1066 @@
+[gd_scene load_steps=22 format=3 uid="uid://b11mdgk4le46c"]
+
+[ext_resource type="Script" uid="uid://ca18cby0a4yr3" path="res://Scripts/World.gd" id="1_5v1tr"]
+[ext_resource type="PackedScene" uid="uid://ieqxkfj7ksi0" path="res://objects/player.tscn" id="1_w8i4m"]
+[ext_resource type="ArrayMesh" uid="uid://h8q3aenpjgtc" path="res://Assets/KayKit_HalloweenBits_1.0_FREE/Assets/obj/arch_gate_left.obj" id="2_hdwrg"]
+[ext_resource type="ArrayMesh" uid="uid://05co0ehf51be" path="res://Assets/KayKit_HalloweenBits_1.0_FREE/Assets/obj/arch_gate.obj" id="3_cylns"]
+[ext_resource type="ArrayMesh" uid="uid://duvpheyct5x21" path="res://Assets/KayKit_HalloweenBits_1.0_FREE/Assets/obj/arch_gate_right.obj" id="4_50653"]
+[ext_resource type="Script" uid="uid://blfxtuuqanphq" path="res://Scripts/NavigationManager.gd" id="6_o06y3"]
+[ext_resource type="Script" uid="uid://cvuuj7lledfgl" path="res://Scripts/PathVisualizer.gd" id="7_qrewv"]
+[ext_resource type="Script" uid="uid://dewfhus3voiju" path="res://Scripts/Navigator.gd" id="8_k7acu"]
+[ext_resource type="Script" uid="uid://cn8cbmr1qscc8" path="res://Scripts/ui/pause_menu.gd" id="9_0fj1v"]
+[ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/Super Meatball.ttf" id="10_0fj1v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jkmb1"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h48fh"]
+albedo_color = Color(0, 0.254902, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_mam76"]
+size = Vector2(50, 50)
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_07chq"]
+size = Vector3(1, 1, 50)
+
+[sub_resource type="Environment" id="Environment_8j60k"]
+background_mode = 1
+background_color = Color(0.382598, 0.478759, 0.852075, 1)
+background_energy_multiplier = 0.56
+
+[sub_resource type="BoxMesh" id="BoxMesh_lbsj4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yui6"]
+bg_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5t2i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0ngr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kn0ld"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fj1v"]
+bg_color = Color(0.22, 0.44, 0.3556667, 1)
+
+[node name="world" type="Node3D"]
+script = ExtResource("1_5v1tr")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_jkmb1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("StandardMaterial3D_h48fh")
+mesh = SubResource("QuadMesh_mam76")
+
+[node name="Player" parent="." instance=ExtResource("1_w8i4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.858192, 23.9289)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.14161, 0.989923, 0, -0.989923, 0.14161, 0, 8.28637, 0)
+
+[node name="ArchGate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204089, -9.53674e-07, 20.7724)
+mesh = ExtResource("3_cylns")
+
+[node name="AllGates" type="StaticBody3D" parent="."]
+
+[node name="AllGate4" type="StaticBody3D" parent="AllGates"]
+transform = Transform3D(-0.00251333, 0, -0.999997, 0, 1, 0, 0.999997, 0, -0.00251333, 44.8654, 0, -0.441954)
+
+[node name="Gate14" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9037, 0, -0.352375)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate17" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5682, 0, -0.356556)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate13" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.207, 0, -0.352375)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate12" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.49657, 0, -0.352375)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate11" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81388, 0, -0.352375)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate10" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.07256, 0, -0.352379)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate9" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34352, 0, -0.352379)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate2" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38756, 0, -0.352375)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate4/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate8" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4172, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate15" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.089, 0, 0.00671387)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate7" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6713, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate6" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8803, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate5" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1215, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate4" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37885, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate3" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69502, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate1" type="StaticBody3D" parent="AllGates/AllGate4"]
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate16" type="StaticBody3D" parent="AllGates/AllGate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80184, 0, -0.00704193)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate4/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate4/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="AllGate3" type="StaticBody3D" parent="AllGates"]
+transform = Transform3D(-0.00251333, 0, -0.999997, 0, 1, 0, 0.999997, 0, -0.00251333, -3.55552, 0, -0.648365)
+
+[node name="Gate14" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2913, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate3/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate13" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5946, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate3/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate12" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8841, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate3/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate11" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.20144, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate3/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate10" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46012, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate3/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate9" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.73107, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate3/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate2" type="StaticBody3D" parent="AllGates/AllGate3"]
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate3/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate8" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4163, 0, 0.362195)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate17" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.118, 0, 0.368985)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate7" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6704, 0, 0.362195)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate6" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8794, 0, 0.362195)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate5" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12059, 0, 0.362195)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate4" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37793, 0, 0.362195)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate3" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69411, 0, 0.362195)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate1" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000910282, 0, 0.362195)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate15" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75992, 0, 0.35526)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate16" type="StaticBody3D" parent="AllGates/AllGate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61927, 0, 0.350587)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate3/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate3/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="AllGate2" type="StaticBody3D" parent="AllGates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -44.5303)
+
+[node name="Gate14" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5335, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate16" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3243, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate13" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8369, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate12" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1264, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate11" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4437, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate10" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.70239, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate9" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97334, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate2" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.242269, 0, -1.23229)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate2/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate8" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4172, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate15" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0744, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate7" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6713, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate6" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8803, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate5" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1215, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate4" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37885, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate3" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69502, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate1" type="StaticBody3D" parent="AllGates/AllGate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.826656)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate2/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate2/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="AllGate" type="StaticBody3D" parent="AllGates"]
+
+[node name="Gate14" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2913, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate16" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0386, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate13" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5946, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate12" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8841, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate11" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.20144, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate10" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46012, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate9" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.73107, 0, 0)
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate2" type="StaticBody3D" parent="AllGates/AllGate"]
+
+[node name="ArchGateRight" type="MeshInstance3D" parent="AllGates/AllGate/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39937, 0, 20.8833)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft2" type="MeshInstance3D" parent="AllGates/AllGate/Gate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40721, -0.0068326, 20.8682)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate8" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4172, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate15" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1515, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate7" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6713, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate6" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8803, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate5" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1215, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate4" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37885, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate3" type="StaticBody3D" parent="AllGates/AllGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69502, 0, 0)
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="Gate1" type="StaticBody3D" parent="AllGates/AllGate"]
+
+[node name="ArchGateRight2" type="MeshInstance3D" parent="AllGates/AllGate/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80427, -0.00088501, 20.5242)
+mesh = ExtResource("4_50653")
+skeleton = NodePath("../../../..")
+
+[node name="ArchGateLeft" type="MeshInstance3D" parent="AllGates/AllGate/Gate1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80401, 0, 20.5024)
+mesh = ExtResource("2_hdwrg")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AllGates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -4.68137)
+shape = SubResource("BoxShape3D_07chq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="AllGates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2093, 0, -4.68137)
+shape = SubResource("BoxShape3D_07chq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8j60k")
+
+[node name="Systems" type="Node3D" parent="."]
+
+[node name="NavigationManager" type="Node3D" parent="Systems"]
+script = ExtResource("6_o06y3")
+
+[node name="NodeDebug" type="Node3D" parent="Systems"]
+
+[node name="Navigator" type="Node3D" parent="Systems"]
+script = ExtResource("8_k7acu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Systems/Navigator"]
+mesh = SubResource("BoxMesh_lbsj4")
+
+[node name="PathVisualizer" type="Node3D" parent="Systems"]
+script = ExtResource("7_qrewv")
+
+[node name="Navigation" type="Node3D" parent="."]
+
+[node name="Goal_Kandang" type="Node3D" parent="Navigation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8251, 0, 3.1781)
+
+[node name="Debug_Goal" type="CSGSphere3D" parent="Navigation/Goal_Kandang"]
+
+[node name="Start_Gerbang" type="Node3D" parent="Navigation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999445, 0, 20.0932)
+
+[node name="Debug_Start" type="CSGSphere3D" parent="Navigation/Start_Gerbang"]
+
+[node name="Ui" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="PauseButton" type="Button" parent="Ui"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -95.0
+offset_top = 30.0
+offset_right = -32.0
+offset_bottom = 89.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_7yui6")
+text = "pause"
+
+[node name="PauseMenu" type="Control" parent="Ui"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_0fj1v")
+
+[node name="PausePanel" type="VBoxContainer" parent="Ui/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -125.0
+offset_right = 100.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Ui/PauseMenu/PausePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("10_0fj1v")
+theme_override_font_sizes/font_size = 39
+text = "PAUSE
+"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Ui/PauseMenu/PausePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+theme_override_fonts/font = ExtResource("10_0fj1v")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_c5t2i")
+text = "Resume 
+"
+
+[node name="RestartButton" type="Button" parent="Ui/PauseMenu/PausePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+theme_override_fonts/font = ExtResource("10_0fj1v")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_e0ngr")
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="Ui/PauseMenu/PausePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+theme_override_fonts/font = ExtResource("10_0fj1v")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_kn0ld")
+text = "Quit
+"
+
+[node name="ProgressButton" type="Button" parent="Ui"]
+offset_left = 23.0
+offset_top = 33.0
+offset_right = 85.0
+offset_bottom = 83.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_0fj1v")
+text = "Koleksi"
+
+[connection signal="pressed" from="Ui/PauseButton" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="Ui/ProgressButton" to="." method="_on_progress_button_pressed"]
