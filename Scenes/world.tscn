@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b11mdgk4le46c"]
+[gd_scene load_steps=24 format=3 uid="uid://b11mdgk4le46c"]
 
 [ext_resource type="Script" uid="uid://ca18cby0a4yr3" path="res://Scripts/World.gd" id="1_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://ieqxkfj7ksi0" path="res://objects/player.tscn" id="1_w8i4m"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://dewfhus3voiju" path="res://Scripts/Navigator.gd" id="8_k7acu"]
 [ext_resource type="Script" uid="uid://cn8cbmr1qscc8" path="res://Scripts/ui/pause_menu.gd" id="9_0fj1v"]
 [ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/Super Meatball.ttf" id="10_0fj1v"]
+[ext_resource type="PackedScene" uid="uid://d22lw8tmhm65g" path="res://Assets/3d_kandang/kandanganoa.glb" id="11_ikia7"]
+[ext_resource type="PackedScene" uid="uid://cdrnwf5ivo2id" path="res://Scenes/kandang/KandangTrigger.tscn" id="12_7yui6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jkmb1"]
 size = Vector3(50, 1, 50)
@@ -958,6 +960,7 @@ script = ExtResource("6_o06y3")
 script = ExtResource("8_k7acu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Systems/Navigator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17950535, 0)
 mesh = SubResource("BoxMesh_lbsj4")
 
 [node name="PathVisualizer" type="Node3D" parent="Systems"]
@@ -969,6 +972,7 @@ script = ExtResource("7_qrewv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8251, 0, 3.1781)
 
 [node name="Debug_Goal" type="CSGSphere3D" parent="Navigation/Goal_Kandang"]
+radius = 0.001
 
 [node name="Start_Gerbang" type="Node3D" parent="Navigation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999445, 0, 20.0932)
@@ -1061,6 +1065,16 @@ offset_right = 85.0
 offset_bottom = 83.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_0fj1v")
 text = "Koleksi"
+
+[node name="Kandang-Kandang" type="Node3D" parent="."]
+
+[node name="kandang_anoa" parent="Kandang-Kandang" instance=ExtResource("11_ikia7")]
+transform = Transform3D(5.816824, 0, -3.8941703, 0, 7, 0, 3.8941703, 0, 5.816824, -11.242867, 1.5859798, 12.819244)
+
+[node name="KandangTrigger" parent="Kandang-Kandang/kandang_anoa" instance=ExtResource("12_7yui6")]
+transform = Transform3D(1, 0, 0, 0, 1.0000006, 0, 0, 0, 1, -0.030307174, 0, -0.045270443)
+id_hewan = null
+nama_kandang = null
 
 [connection signal="pressed" from="Ui/PauseButton" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="Ui/ProgressButton" to="." method="_on_progress_button_pressed"]

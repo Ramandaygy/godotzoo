@@ -1,0 +1,49 @@
+{
+	"anoa": {
+		"nama": "Anoa",
+		"nama_latin": "Bubalus depressicornis",
+		"habitat": "Hutan tropis Sulawesi",
+		"makanan": "Rumput, daun, buah-buahan",
+		"fakta_menarik": "Anoa adalah hewan endemik Sulawesi dan merupakan kerabat dekat kerbau.",
+		"status": "Terancam Punah",
+		"narasi": "Ini adalah Anoa, hewan endemik dari Sulawesi. Anoa dikenal sebagai kerbau kerdil yang hanya ditemukan di Indonesia.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Di mana habitat asli Anoa?",
+			"pilihan": ["Jawa", "Sumatera", "Sulawesi", "Kalimantan"],
+			"jawaban_benar": 2
+		}
+	},
+	
+	"harimau": {
+		"nama": "Harimau Sumatera",
+		"nama_latin": "Panthera tigris sumatrae",
+		"habitat": "Hutan hujan tropis Sumatera",
+		"makanan": "Daging (karnivora)",
+		"fakta_menarik": "Harimau Sumatera adalah spesies harimau terkecil di dunia dan hanya ditemukan di Sumatera.",
+		"status": "Kritis",
+		"narasi": "Ini adalah Harimau Sumatera, kucing besar terakhir yang bertahan di Indonesia. Mereka adalah pemangsa puncak di ekosistem hutan Sumatera.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Apa makanan utama Harimau Sumatera?",
+			"pilihan": ["Rumput", "Daging", "Buah-buahan", "Ikan"],
+			"jawaban_benar": 1
+		}
+	},
+	
+	"gajah": {
+		"nama": "Gajah Sumatera",
+		"nama_latin": "Elephas maximus sumatranus",
+		"habitat": "Hutan dataran rendah Sumatera",
+		"makanan": "Tumbuhan, rumput, kulit kayu",
+		"fakta_menarik": "Gajah Sumatera adalah subspesies terkecil dari gajah Asia dan memiliki tinggi bahu hanya 2-3 meter.",
+		"status": "Kritis",
+		"narasi": "Ini adalah Gajah Sumatera, mamalia darat terbesar di Indonesia. Mereka memainkan peran penting sebagai ecosystem engineer di hutan.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Berapa tinggi bahu Gajah Sumatera?",
+			"pilihan": ["5-6 meter", "3-4 meter", "2-3 meter", "1-2 meter"],
+			"jawaban_benar": 2
+		}
+	}
+}

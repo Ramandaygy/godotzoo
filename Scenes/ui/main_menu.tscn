@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b0puwtkunyhj2" path="res://Scripts/ui/main_menu.gd" id="1_sn23y"]
 [ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/Super Meatball.ttf" id="2_e23ap"]
 [ext_resource type="Script" uid="uid://etqfwk4877a8" path="res://Scripts/ui/setting.gd" id="4_baxwh"]
-[ext_resource type="Script" uid="uid://bxsmvcmve5gc4" path="res://Scripts/audio_control.gd" id="5_0js1b"]
+[ext_resource type="Script" uid="uid://bxsmvcmve5gc4" path="res://autoload/AudioControl.gd" id="5_0js1b"]
 [ext_resource type="AudioStream" uid="uid://c8lfqu2njvjsx" path="res://Audio/backsound.wav" id="5_1u1h3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e23ap"]

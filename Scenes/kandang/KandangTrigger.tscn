@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdrnwf5ivo2id"]
+
+[ext_resource type="Script" uid="uid://cgg43m1wjtlye" path="res://Scenes/kandang/KandangTrigger.gd" id="1_4m2ii"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5sb73"]
+radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00d5n"]
+blend_mode = 1
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ehe4u"]
+material = SubResource("StandardMaterial3D_00d5n")
+radius = 1.5
+
+[node name="KandangTrigger" type="Node3D"]
+script = ExtResource("1_4m2ii")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5sb73")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ehe4u")
