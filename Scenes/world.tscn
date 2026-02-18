@@ -1,27 +1,18 @@
-[gd_scene load_steps=24 format=3 uid="uid://b11mdgk4le46c"]
+[gd_scene load_steps=28 format=3 uid="uid://b11mdgk4le46c"]
 
 [ext_resource type="Script" uid="uid://ca18cby0a4yr3" path="res://Scripts/World.gd" id="1_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://ieqxkfj7ksi0" path="res://objects/player.tscn" id="1_w8i4m"]
 [ext_resource type="ArrayMesh" uid="uid://h8q3aenpjgtc" path="res://Assets/KayKit_HalloweenBits_1.0_FREE/Assets/obj/arch_gate_left.obj" id="2_hdwrg"]
 [ext_resource type="ArrayMesh" uid="uid://05co0ehf51be" path="res://Assets/KayKit_HalloweenBits_1.0_FREE/Assets/obj/arch_gate.obj" id="3_cylns"]
 [ext_resource type="ArrayMesh" uid="uid://duvpheyct5x21" path="res://Assets/KayKit_HalloweenBits_1.0_FREE/Assets/obj/arch_gate_right.obj" id="4_50653"]
-[ext_resource type="Script" uid="uid://blfxtuuqanphq" path="res://Scripts/NavigationManager.gd" id="6_o06y3"]
-[ext_resource type="Script" uid="uid://cvuuj7lledfgl" path="res://Scripts/PathVisualizer.gd" id="7_qrewv"]
-[ext_resource type="Script" uid="uid://dewfhus3voiju" path="res://Scripts/Navigator.gd" id="8_k7acu"]
+[ext_resource type="Script" uid="uid://cp6vvuchih2n8" path="res://Scripts/SimpleNavigator.gd" id="5_0fj1v"]
 [ext_resource type="Script" uid="uid://cn8cbmr1qscc8" path="res://Scripts/ui/pause_menu.gd" id="9_0fj1v"]
-[ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/Super Meatball.ttf" id="10_0fj1v"]
+[ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/font/Super Meatball.ttf" id="10_0fj1v"]
+[ext_resource type="Texture2D" uid="uid://cdvajevt7e471" path="res://Assets/Assets Pack/enemy/GobelinColors.png" id="11_c5t2i"]
 [ext_resource type="PackedScene" uid="uid://d22lw8tmhm65g" path="res://Assets/3d_kandang/kandanganoa.glb" id="11_ikia7"]
 [ext_resource type="PackedScene" uid="uid://cdrnwf5ivo2id" path="res://Scenes/kandang/KandangTrigger.tscn" id="12_7yui6"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jkmb1"]
-size = Vector3(50, 1, 50)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h48fh"]
-albedo_color = Color(0, 0.254902, 0, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_mam76"]
-size = Vector2(50, 50)
-orientation = 1
+[ext_resource type="ArrayMesh" uid="uid://b1klbaynfgwbn" path="res://Assets/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/obj/Tree_4_B_Color1.obj" id="12_e0ngr"]
+[ext_resource type="ArrayMesh" uid="uid://cbhakavmrqv56" path="res://Assets/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/obj/Bush_2_E_Color1.obj" id="13_kn0ld"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_07chq"]
 size = Vector3(1, 1, 50)
@@ -31,10 +22,8 @@ background_mode = 1
 background_color = Color(0.382598, 0.478759, 0.852075, 1)
 background_energy_multiplier = 0.56
 
-[sub_resource type="BoxMesh" id="BoxMesh_lbsj4"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yui6"]
-bg_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+bg_color = Color(0.678431, 0.556863, 0.380392, 0.945098)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5t2i"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -46,23 +35,34 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fj1v"]
-bg_color = Color(0.22, 0.44, 0.3556667, 1)
+bg_color = Color(0.22, 0.44, 0.355667, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hgpy0"]
+texture = ExtResource("11_c5t2i")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_lt30t"]
+agent_max_climb = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fj1v"]
+albedo_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_ikia7"]
+material = SubResource("StandardMaterial3D_0fj1v")
+size = Vector3(3, 0.1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jkmb1"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h48fh"]
+albedo_color = Color(0, 0.254902, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_mam76"]
+size = Vector2(50, 50)
+orientation = 1
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_5v1tr")
-
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_jkmb1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-material_override = SubResource("StandardMaterial3D_h48fh")
-mesh = SubResource("QuadMesh_mam76")
-
-[node name="Player" parent="." instance=ExtResource("1_w8i4m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.858192, 23.9289)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.14161, 0.989923, 0, -0.989923, 0.14161, 0, 8.28637, 0)
@@ -949,35 +949,12 @@ shape = SubResource("BoxShape3D_07chq")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8j60k")
 
-[node name="Systems" type="Node3D" parent="."]
+[node name="SimpleNavigator" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("5_0fj1v")
+player = NodePath("Player")
 
-[node name="NavigationManager" type="Node3D" parent="Systems"]
-script = ExtResource("6_o06y3")
-
-[node name="NodeDebug" type="Node3D" parent="Systems"]
-
-[node name="Navigator" type="Node3D" parent="Systems"]
-script = ExtResource("8_k7acu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Systems/Navigator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17950535, 0)
-mesh = SubResource("BoxMesh_lbsj4")
-
-[node name="PathVisualizer" type="Node3D" parent="Systems"]
-script = ExtResource("7_qrewv")
-
-[node name="Navigation" type="Node3D" parent="."]
-
-[node name="Goal_Kandang" type="Node3D" parent="Navigation"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8251, 0, 3.1781)
-
-[node name="Debug_Goal" type="CSGSphere3D" parent="Navigation/Goal_Kandang"]
-radius = 0.001
-
-[node name="Start_Gerbang" type="Node3D" parent="Navigation"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999445, 0, 20.0932)
-
-[node name="Debug_Start" type="CSGSphere3D" parent="Navigation/Start_Gerbang"]
+[node name="Player" parent="SimpleNavigator" instance=ExtResource("1_w8i4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.858192, 23.9289)
 
 [node name="Ui" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -997,6 +974,7 @@ text = "pause"
 
 [node name="PauseMenu" type="Control" parent="Ui"]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1032,7 +1010,7 @@ horizontal_alignment = 1
 [node name="ResumeButton" type="Button" parent="Ui/PauseMenu/PausePanel"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+theme_override_colors/font_color = Color(0.678431, 0.556863, 0.380392, 0.945098)
 theme_override_fonts/font = ExtResource("10_0fj1v")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_c5t2i")
@@ -1042,7 +1020,7 @@ text = "Resume
 [node name="RestartButton" type="Button" parent="Ui/PauseMenu/PausePanel"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+theme_override_colors/font_color = Color(0.678431, 0.556863, 0.380392, 0.945098)
 theme_override_fonts/font = ExtResource("10_0fj1v")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_e0ngr")
@@ -1051,7 +1029,7 @@ text = "Restart"
 [node name="QuitButton" type="Button" parent="Ui/PauseMenu/PausePanel"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+theme_override_colors/font_color = Color(0.678431, 0.556863, 0.380392, 0.945098)
 theme_override_fonts/font = ExtResource("10_0fj1v")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_kn0ld")
@@ -1069,12 +1047,100 @@ text = "Koleksi"
 [node name="Kandang-Kandang" type="Node3D" parent="."]
 
 [node name="kandang_anoa" parent="Kandang-Kandang" instance=ExtResource("11_ikia7")]
-transform = Transform3D(5.816824, 0, -3.8941703, 0, 7, 0, 3.8941703, 0, 5.816824, -11.242867, 1.5859798, 12.819244)
+transform = Transform3D(5.81682, 0, -3.89417, 0, 7, 0, 3.89417, 0, 5.81682, -11.2429, 1.58598, 12.8192)
 
 [node name="KandangTrigger" parent="Kandang-Kandang/kandang_anoa" instance=ExtResource("12_7yui6")]
-transform = Transform3D(1, 0, 0, 0, 1.0000006, 0, 0, 0, 1, -0.030307174, 0, -0.045270443)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303072, 0, -0.0452704)
 id_hewan = null
 nama_kandang = null
+
+[node name="KandangUI" type="CanvasLayer" parent="Kandang-Kandang/kandang_anoa"]
+
+[node name="Panel" type="Panel" parent="Kandang-Kandang/kandang_anoa/KandangUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -30.0
+offset_right = -18.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hgpy0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Kandang-Kandang/kandang_anoa/KandangUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Kandang-Kandang/kandang_anoa/KandangUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Kandang-Kandang/kandang_anoa/KandangUI/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Kandang-Kandang/kandang_anoa/KandangUI/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "GAMBAR HEWAN"
+
+[node name="Label2" type="Label" parent="Kandang-Kandang/kandang_anoa/KandangUI/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nama Hewan"
+
+[node name="Label3" type="Label" parent="Kandang-Kandang/kandang_anoa/KandangUI/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Deskripsi"
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_lt30t")
+
+[node name="Jalan" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="JalanSegment1" type="MeshInstance3D" parent="NavigationRegion3D/Jalan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2932036, 15.594139)
+mesh = SubResource("BoxMesh_ikia7")
+
+[node name="Floor" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_jkmb1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor"]
+material_override = SubResource("StandardMaterial3D_h48fh")
+mesh = SubResource("QuadMesh_mam76")
+
+[node name="Tree4BColor1" type="MeshInstance3D" parent="NavigationRegion3D/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.646812, 0.32193422, 8.3167305)
+mesh = ExtResource("12_e0ngr")
+
+[node name="JalanUtama" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.237982)
+polygon = PackedVector2Array(-4.4766064, -2.5012755, -7.086072, -0.47275352, -5.8263836, 1.071188, 1.3398077, -2.5430245)
+mode = 2
+path_node = NodePath("")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Bush2EColor1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.343547, 0, 17.415817)
+mesh = ExtResource("13_kn0ld")
 
 [connection signal="pressed" from="Ui/PauseButton" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="Ui/ProgressButton" to="." method="_on_progress_button_pressed"]

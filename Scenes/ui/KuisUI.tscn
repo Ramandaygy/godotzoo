@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dkbcifj5rg3ni"]
 
-[ext_resource type="Script" uid="uid://ee2e7a43xwsw" path="res://Scenes/ui/kuis_ui.gd" id="1_w1n4i"]
+[ext_resource type="Script" uid="uid://ee2e7a43xwsw" path="res://Scripts/ui/kuis_ui.gd" id="1_w1n4i"]
 
 [node name="KuisUi" type="Control"]
 layout_mode = 3
@@ -12,7 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_w1n4i")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0.003921569)
+modulate = Color(1, 1, 1, 0.00392157)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1g0kquda00sl"]
+
+[ext_resource type="Script" uid="uid://bvop3vyb8yt3l" path="res://Scripts/ui/Opening.gd" id="1_7ynk8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adxob"]
+bg_color = Color(0.23921569, 0.43137255, 0.3019608, 1)
+
+[node name="Opening" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ynk8")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.20784314, 0.14117648, 1)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1148.0
+offset_bottom = 471.0
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+custom_minimum_size = Vector2(720, 260)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0070001
+anchor_bottom = 0.94500005
+offset_right = -0.036132813
+offset_bottom = -0.09503174
+stretch_mode = 3
+
+[node name="AudioNarasi" type="AudioStreamPlayer" parent="Panel"]
+
+[node name="TeksNarasi" type="RichTextLabel" parent="Panel"]
+custom_minimum_size = Vector2(1150, 200)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -573.0
+offset_top = -23.0
+offset_right = 577.0
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_adxob")
+text = "Loading narasi"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JudulLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -94.5
+offset_right = 94.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "SEJARAH RAGUNAN ZOO"
+
+[node name="ButtonSkip" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.883
+anchor_top = 0.96800005
+anchor_right = 0.94400007
+anchor_bottom = 1.034
+offset_left = 0.315979
+offset_top = 0.07196045
+offset_right = 0.28796387
+offset_bottom = -1.0140076
+text = "SKIP"
+
+[connection signal="finished" from="Panel/AudioNarasi" to="." method="_on_audio_narasi_finished"]

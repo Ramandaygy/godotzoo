@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://lk1ilsk3kbby"]
 
-[ext_resource type="Script" uid="uid://b6nsmoh0vpxjb" path="res://Scripts/ui/progress.gd" id="1_48c3n"]
-[ext_resource type="Script" uid="uid://4poew4er7vdr" path="res://Scripts/ui/animal_card.gd" id="2_gpuup"]
+[ext_resource type="Script" path="res://Scripts/ui/progress.gd" id="1_48c3n"]
+[ext_resource type="Script" path="res://Scripts/ui/animal_card.gd" id="2_gpuup"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgqpf"]
-bg_color = Color(0.37801012, 0.37801012, 0.37801012, 1)
+bg_color = Color(0.37801, 0.37801, 0.37801, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -15,10 +15,10 @@ corner_radius_bottom_left = 12
 [sub_resource type="ButtonGroup" id="ButtonGroup_2co20"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpuup"]
-bg_color = Color(0.33783564, 0.6771055, 0.54456353, 1)
+bg_color = Color(0.337836, 0.677105, 0.544564, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2co20"]
-bg_color = Color(0.305, 0.61, 0.4930834, 1)
+bg_color = Color(0.305, 0.61, 0.493083, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -85,7 +85,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Progress Minggu ini"
 vertical_alignment = 1
-autowrap_trim_flags = 128
 
 [node name="WeeklyProgressBar" type="ProgressBar" parent="PaddingPage/MainContainer/ProgressCard/CardPadding/CardContent"]
 custom_minimum_size = Vector2(0, 14)

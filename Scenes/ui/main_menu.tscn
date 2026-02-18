@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://mevclvfrtamu"]
 
-[ext_resource type="Texture2D" uid="uid://byniti6pnevj7" path="res://Assets/Gemini_Generated_Image_j8h1kjj8h1kjj8h1.png" id="1_c2fhx"]
+[ext_resource type="Texture2D" uid="uid://byniti6pnevj7" path="res://Assets/gambar/Gemini_Generated_Image_j8h1kjj8h1kjj8h1.png" id="1_c2fhx"]
 [ext_resource type="Script" uid="uid://b0puwtkunyhj2" path="res://Scripts/ui/main_menu.gd" id="1_sn23y"]
-[ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/Super Meatball.ttf" id="2_e23ap"]
+[ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/font/Super Meatball.ttf" id="2_e23ap"]
 [ext_resource type="Script" uid="uid://etqfwk4877a8" path="res://Scripts/ui/setting.gd" id="4_baxwh"]
 [ext_resource type="Script" uid="uid://bxsmvcmve5gc4" path="res://autoload/AudioControl.gd" id="5_0js1b"]
 [ext_resource type="AudioStream" uid="uid://c8lfqu2njvjsx" path="res://Audio/backsound.wav" id="5_1u1h3"]
@@ -12,22 +12,22 @@ texture = ExtResource("1_c2fhx")
 modulate_color = Color(0.556953, 0.556953, 0.556953, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd7iy"]
-bg_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+bg_color = Color(0.678431, 0.556863, 0.380392, 0.945098)
 shadow_size = 5
 shadow_offset = Vector2(0, 3.41)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baxwh"]
-bg_color = Color(0.29411766, 0.43137255, 0.23921569, 0.94509804)
+bg_color = Color(0.294118, 0.431373, 0.239216, 0.945098)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1u1h3"]
-bg_color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+bg_color = Color(0.678431, 0.556863, 0.380392, 0.945098)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_0js1b"]
-color = Color(0.9261191, 0.8593104, 0.7660933, 0.94509804)
+color = Color(0.926119, 0.85931, 0.766093, 0.945098)
 thickness = 10
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_iug37"]
-color = Color(0.6784314, 0.5568628, 0.38039216, 0.94509804)
+color = Color(0.678431, 0.556863, 0.380392, 0.945098)
 thickness = 10
 
 [node name="main_menu" type="Control"]

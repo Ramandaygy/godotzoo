@@ -142,3 +142,19 @@ func load_progress():
 			data_hewan[id].sudah_dikunjungi = save_data.progress[id].sudah_dikunjungi
 	
 	print("📂 Progress loaded from: ", SAVE_PATH)
+
+# ============================================
+# FUNGSI: GET TOTAL & JUMLAH (TAMBAHAN)
+# ============================================
+
+func get_total_kandang() -> int:
+	"""Mengembalikan total jumlah hewan yang ada di database"""
+	return data_hewan.size()
+
+func get_jumlah_dikunjungi() -> int:
+	"""Mengembalikan jumlah hewan yang sudah dikunjungi"""
+	var count = 0
+	for id in data_hewan:
+		if data_hewan[id].sudah_dikunjungi:
+			count += 1
+	return count
