@@ -3,7 +3,7 @@ extends Control
 # ID hewan (sesuai dengan key di JSON)
 @export var hewan_id: String = "anoa"
 
-# Referensi node - SESUAIKAN DENGAN NAMA DI SCENE ANDA
+# Referensi node
 @onready var background = $Background if has_node("Background") else null
 @onready var btn_close = $CloseButton if has_node("CloseButton") else null
 @onready var panel = $Panel if has_node("Panel") else null
@@ -66,7 +66,8 @@ func check_nodes():
 		"Background", "CloseButton", "Panel", 
 		"Panel/JudulLabel", "Panel/FotoHewan", "Panel/deskripsi",
 		"Panel/ButtonAudio", "Panel/ButtonKuis", "ButtonKembali",
-		"AudioNarasi", "SubViewportContainer", "AnimationPlayer"
+		"AudioNarasi", "SubViewportContainer", "AnimationPlayer",
+		"SubViewportContainer/SubViewport/anoa"
 	]
 	
 	for path in nodes:
@@ -77,10 +78,14 @@ func check_nodes():
 	
 	# Cek node di dalam viewport
 	if has_node("SubViewportContainer/SubViewport"):
-		print("  🔍 Memeriksa node di dalam SubViewport:")
+		print("  🔍 Node di dalam SubViewport:")
 		var viewport = $SubViewportContainer/SubViewport
 		for child in viewport.get_children():
-			print("    - ", child.name)
+			print("    - ", child.name, " (", child.get_class(), ")")
+			# Jika anaknya Node3D, cek komponennya
+			if child is Node3D:
+				for grandchild in child.get_children():
+					print("      * ", grandchild.name, " (", grandchild.get_class(), ")")
 
 func setup_viewport():
 	"""Atur SubViewportContainer dan SubViewport agar 3D muncul"""
@@ -89,7 +94,6 @@ func setup_viewport():
 	if viewport_container:
 		# Atur container
 		viewport_container.stretch = true
-		# Atur anchors untuk membuatnya memenuhi area
 		viewport_container.anchor_left = 0.4
 		viewport_container.anchor_top = 0.1
 		viewport_container.anchor_right = 0.8
@@ -97,26 +101,48 @@ func setup_viewport():
 		print("  ✅ SubViewportContainer stretch=", viewport_container.stretch)
 		
 		if sub_viewport:
-			# Atur viewport
+			# RESET KE PENGATURAN DEFAULT YANG AMAN
 			sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 			sub_viewport.disable_3d = false
 			sub_viewport.transparent_bg = false
-			# Set ukuran viewport
 			sub_viewport.size = Vector2i(512, 512)
-			print("  ✅ SubViewport diatur, disable_3d=", sub_viewport.disable_3d)
+			print("  ✅ SubViewport diatur:")
+			print("     - disable_3d: ", sub_viewport.disable_3d)
+			print("     - transparent_bg: ", sub_viewport.transparent_bg)
+			print("     - update_mode: ", sub_viewport.render_target_update_mode)
 			
-			# Atur kamera
+			# PASTIKAN ADA CAHAYA
+			var has_light = false
+			for child in sub_viewport.get_children():
+				if child is Light3D:
+					has_light = true
+					print("  ✅ Cahaya ditemukan: ", child.name)
+					break
+			
+			if not has_light:
+				print("  ⚠️ Tidak ada cahaya, menambahkan cahaya default")
+				var light = DirectionalLight3D.new()
+				light.name = "DirectionalLight"
+				light.rotation_degrees = Vector3(-45, 45, 0)
+				light.light_energy = 1.5
+				sub_viewport.add_child(light)
+			
+			# ATUR KAMERA
 			if camera_3d:
-				print("  ✅ Camera3D ditemukan: pos=", camera_3d.position)
+				print("  ✅ Camera3D ditemukan")
+				# Reset kamera ke posisi aman
+				camera_3d.current = true
+				camera_3d.position = Vector3(3, 2, 3)
+				camera_3d.rotation_degrees = Vector3(-20, 135, 0)
 				
-				# Arahkan kamera ke model jika ada
-				if hewan_3d:
-					# Tunggu sebentar agar model siap
-					await get_tree().process_frame
-					camera_3d.look_at(hewan_3d.global_position, Vector3.UP)
-					print("  ✅ Kamera diarahkan ke model")
+				# Arahkan ke pusat
+				camera_3d.look_at(Vector3(0, 1, 0), Vector3.UP)
+				
+				print("     - position: ", camera_3d.position)
+				print("     - rotation: ", camera_3d.rotation_degrees)
+				print("     - current: ", camera_3d.current)
 			else:
-				print("  ❌ Camera3D tidak ditemukan, buat kamera default")
+				print("  ❌ Camera3D tidak ditemukan")
 				create_default_camera()
 		else:
 			print("  ❌ SubViewport tidak ditemukan")
@@ -133,7 +159,9 @@ func create_default_camera():
 	var camera = Camera3D.new()
 	camera.name = "Camera3D"
 	camera.position = Vector3(3, 2, 3)
-	camera.look_at(Vector3(0, 1, 0))
+	camera.rotation_degrees = Vector3(-20, 135, 0)
+	camera.current = true
+	camera.look_at(Vector3(0, 1, 0), Vector3.UP)
 	sub_viewport.add_child(camera)
 	camera_3d = camera
 	print("✅ Kamera default dibuat")
@@ -142,7 +170,6 @@ func create_default_viewport():
 	"""Buat viewport default jika tidak ada"""
 	print("🛠️ Membuat viewport default...")
 	
-	# Buat container
 	var container = SubViewportContainer.new()
 	container.name = "SubViewportContainer"
 	container.anchor_left = 0.4
@@ -153,12 +180,12 @@ func create_default_viewport():
 	add_child(container)
 	viewport_container = container
 	
-	# Buat viewport
 	var viewport = SubViewport.new()
 	viewport.name = "SubViewport"
 	viewport.size = Vector2i(512, 512)
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	viewport.disable_3d = false
+	viewport.transparent_bg = false
 	container.add_child(viewport)
 	sub_viewport = viewport
 	
@@ -166,11 +193,19 @@ func create_default_viewport():
 	var camera = Camera3D.new()
 	camera.name = "Camera3D"
 	camera.position = Vector3(3, 2, 3)
-	camera.look_at(Vector3(0, 1, 0))
+	camera.rotation_degrees = Vector3(-20, 135, 0)
+	camera.current = true
 	viewport.add_child(camera)
 	camera_3d = camera
 	
-	print("✅ Viewport default dibuat")
+	# Buat cahaya
+	var light = DirectionalLight3D.new()
+	light.name = "DirectionalLight"
+	light.rotation_degrees = Vector3(-45, 45, 0)
+	light.light_energy = 1.5
+	viewport.add_child(light)
+	
+	print("✅ Viewport default dibuat dengan kamera dan cahaya")
 
 func connect_signals():
 	if btn_audio:
@@ -234,33 +269,42 @@ func setup_3d():
 	"""Setup model 3D dan animasi"""
 	print("🎬 Setup 3D:")
 	
-	# Cek apakah ada model
-	if hewan_3d:
-		print("  ✅ Model anoa ditemukan")
+	# CARI MODEL 3D DI VIEWPORT (TIDAK HANYA YANG BERNAMA "anoa")
+	var found_model = false
+	
+	if sub_viewport:
+		# Cari semua Node3D di viewport (kecuali camera dan light)
+		for child in sub_viewport.get_children():
+			if child is Node3D and not child is Camera3D and not child is Light3D:
+				hewan_3d = child
+				found_model = true
+				print("  ✅ Model 3D ditemukan: ", child.name, " (", child.get_class(), ")")
+				break
+	
+	if found_model and hewan_3d:
+		print("  ✅ Menggunakan model: ", hewan_3d.name)
 		
-		# Reset posisi model
+		# Reset posisi model ke tengah
 		hewan_3d.position = Vector3(0, 0, 0)
 		hewan_3d.visible = true
 		
-		# Mainkan animasi
+		# Atur scale jika perlu
+		if hewan_3d.has_method("get_scale"):
+			print("     - scale saat ini: ", hewan_3d.scale)
+		
+		# Mainkan animasi jika ada AnimationPlayer
 		if anim_player:
 			# Cek apakah ada animasi yang bisa dimainkan
-			if anim_player.has_animation("idle") or anim_player.has_animation("Idle"):
-				var anim_name = "idle" if anim_player.has_animation("idle") else "Idle"
-				anim_player.play(anim_name)
-				print("  ✅ Animasi '", anim_name, "' dimainkan")
-			elif anim_player.has_animation("walk") or anim_player.has_animation("Walk"):
-				var anim_name = "walk" if anim_player.has_animation("walk") else "Walk"
-				anim_player.play(anim_name)
-				print("  ✅ Animasi '", anim_name, "' dimainkan")
+			var anim_list = anim_player.get_animation_list()
+			if anim_list.size() > 0:
+				anim_player.play(anim_list[0])
+				print("  ✅ Animasi '", anim_list[0], "' dimainkan")
 			else:
-				print("  ⚠️ Animasi tidak ditemukan, buat animasi sederhana")
-				create_simple_animation()
+				print("  ⚠️ Tidak ada animasi di AnimationPlayer")
 		else:
 			print("  ⚠️ AnimationPlayer tidak ditemukan")
-			create_simple_animation()
 	else:
-		print("  ⚠️ Model anoa tidak ditemukan, buat model sederhana")
+		print("  ⚠️ Model 3D tidak ditemukan di viewport, buat model sederhana")
 		create_simple_model()
 
 func create_simple_model():
@@ -271,46 +315,63 @@ func create_simple_model():
 		print("❌ Tidak bisa membuat model: viewport tidak ada")
 		return
 	
+	# Hapus model lama jika ada (agar tidak numpuk)
+	for child in sub_viewport.get_children():
+		if child is Node3D and not child is Camera3D and not child is Light3D:
+			child.queue_free()
+	
 	# Buat node untuk model
 	var model = Node3D.new()
-	model.name = "anoa"
+	model.name = "anoa_placeholder"
 	sub_viewport.add_child(model)
 	hewan_3d = model
+	
+	# Buat material yang lebih terang
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color(0.8, 0.5, 0.2)
 	
 	# Buat badan (cube)
 	var body = MeshInstance3D.new()
 	body.mesh = BoxMesh.new()
-	body.scale = Vector3(1, 0.8, 1.5)
+	body.scale = Vector3(1.2, 0.8, 2.0)
 	body.position = Vector3(0, 1, 0)
-	
-	# Buat material coklat
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.6, 0.4, 0.2)
 	body.material_override = material
-	
 	model.add_child(body)
 	
 	# Buat kepala (sphere)
 	var head = MeshInstance3D.new()
 	head.mesh = SphereMesh.new()
-	head.scale = Vector3(0.5, 0.5, 0.5)
-	head.position = Vector3(1.2, 1.6, 0)
+	head.scale = Vector3(0.6, 0.6, 0.6)
+	head.position = Vector3(1.5, 1.8, 0)
 	head.material_override = material
 	model.add_child(head)
 	
-	# Buat kaki (4 cubes kecil)
-	var kaki_pos = [Vector3(-0.6, 0.3, 0.6), Vector3(0.6, 0.3, 0.6), 
-					Vector3(-0.6, 0.3, -0.6), Vector3(0.6, 0.3, -0.6)]
+	# Buat kaki
+	var kaki_material = StandardMaterial3D.new()
+	kaki_material.albedo_color = Color(0.6, 0.4, 0.15)
+	
+	var kaki_pos = [Vector3(-0.7, 0.4, 0.8), Vector3(0.7, 0.4, 0.8), 
+					Vector3(-0.7, 0.4, -0.8), Vector3(0.7, 0.4, -0.8)]
 	
 	for pos in kaki_pos:
 		var kaki = MeshInstance3D.new()
 		kaki.mesh = BoxMesh.new()
-		kaki.scale = Vector3(0.3, 0.6, 0.3)
+		kaki.scale = Vector3(0.4, 0.8, 0.4)
 		kaki.position = pos
-		kaki.material_override = material
+		kaki.material_override = kaki_material
 		model.add_child(kaki)
 	
-	print("✅ Model sederhana dibuat")
+	# Buat lantai sederhana agar model tidak melayang
+	var floor = MeshInstance3D.new()
+	floor.mesh = BoxMesh.new()
+	floor.scale = Vector3(5, 0.1, 5)
+	floor.position = Vector3(0, -0.5, 0)
+	var floor_material = StandardMaterial3D.new()
+	floor_material.albedo_color = Color(0.3, 0.5, 0.3)
+	floor.material_override = floor_material
+	sub_viewport.add_child(floor)
+	
+	print("✅ Model sederhana dibuat dengan lantai")
 	
 	# Buat animasi
 	create_simple_animation()
@@ -342,7 +403,7 @@ func create_simple_animation():
 	# Tambahkan animasi ke library
 	library.add_animation("rotate", anim)
 	
-	# Tambahkan library ke AnimationPlayer (string kosong untuk default library)
+	# Tambahkan library ke AnimationPlayer
 	anim_player.add_animation_library("", library)
 	
 	# Mainkan animasi
@@ -353,8 +414,7 @@ func setup_audio():
 	if audio_player:
 		var audio_paths = [
 			"res://Assets/audio/" + hewan_id + ".ogg",
-			"res://Assets/audio/" + hewan_id + ".mp3",
-			"res://Assets/sounds/" + hewan_id + ".ogg"
+			"res://Assets/audio/" + hewan_id + ".mp3"
 		]
 		
 		for path in audio_paths:
@@ -422,30 +482,43 @@ func debug_viewport_status():
 	print("\n=== STATUS VIEWPORT ===")
 	
 	if viewport_container:
-		print("Container - visible: ", viewport_container.visible)
 		print("Container - stretch: ", viewport_container.stretch)
 		print("Container - anchors: ", viewport_container.anchor_left, ",", viewport_container.anchor_top, ",", viewport_container.anchor_right, ",", viewport_container.anchor_bottom)
 		
 		if sub_viewport:
-			print("Viewport - size: ", sub_viewport.size)
-			print("Viewport - disable_3d: ", sub_viewport.disable_3d)
-			print("Viewport - update mode: ", sub_viewport.render_target_update_mode)
+			print("\n📊 Viewport Settings:")
+			print("  - size: ", sub_viewport.size)
+			print("  - disable_3d: ", sub_viewport.disable_3d)
+			print("  - transparent_bg: ", sub_viewport.transparent_bg)
+			print("  - update_mode: ", sub_viewport.render_target_update_mode)
 			
-			# Hitung jumlah node 3D
+			print("\n📋 Node di Viewport:")
 			var node_count = 0
+			var has_camera = false
+			var has_light = false
+			
 			for child in sub_viewport.get_children():
-				if child is Node3D:
-					node_count += 1
-					print("  - Node3D: ", child.name, " (", child.get_class(), ")")
-			print("Total Node3D di viewport: ", node_count)
+				print("  - ", child.name, " (", child.get_class(), ")")
+				node_count += 1
+				
+				if child is Camera3D:
+					has_camera = true
+					print("    📷 pos: ", child.position)
+					print("    📷 current: ", child.current)
+				if child is Light3D:
+					has_light = true
+					print("    💡 energy: ", child.light_energy)
+			
+			print("\nTotal node: ", node_count)
+			print("Camera ada: ", has_camera)
+			print("Light ada: ", has_light)
 			
 			# Cek texture
 			var tex = sub_viewport.get_texture()
 			if tex:
-				print("Texture size: ", tex.get_size())
-				print("Texture viewport path: ", tex.get_viewport_path_in_scene())
+				print("\nTexture size: ", tex.get_size())
 			else:
-				print("❌ Tidak ada texture")
+				print("\n❌ Tidak ada texture")
 		else:
 			print("❌ SubViewport tidak ada")
 	else:
