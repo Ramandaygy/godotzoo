@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b11mdgk4le46c"]
+[gd_scene load_steps=28 format=3 uid="uid://b11mdgk4le46c"]
 
 [ext_resource type="Script" uid="uid://ca18cby0a4yr3" path="res://Scripts/World.gd" id="1_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://ieqxkfj7ksi0" path="res://objects/player.tscn" id="1_w8i4m"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cp6vvuchih2n8" path="res://Scripts/SimpleNavigator.gd" id="5_0fj1v"]
 [ext_resource type="Script" uid="uid://cn8cbmr1qscc8" path="res://Scripts/ui/pause_menu.gd" id="9_0fj1v"]
 [ext_resource type="FontFile" uid="uid://vb0nfsmylelc" path="res://Assets/font/Super Meatball.ttf" id="10_0fj1v"]
+[ext_resource type="Script" uid="uid://dh4wj2pgjxut3" path="res://Scenes/KandangKlik.gd" id="11_c5t2i"]
 [ext_resource type="PackedScene" uid="uid://d22lw8tmhm65g" path="res://Assets/3d_kandang/kandanganoa.glb" id="11_ikia7"]
 [ext_resource type="PackedScene" uid="uid://cdrnwf5ivo2id" path="res://Scenes/kandang/KandangTrigger.tscn" id="12_7yui6"]
 [ext_resource type="ArrayMesh" uid="uid://b1klbaynfgwbn" path="res://Assets/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/obj/Tree_4_B_Color1.obj" id="12_e0ngr"]
@@ -35,6 +36,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fj1v"]
 bg_color = Color(0.22, 0.44, 0.355667, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c5t2i"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_lt30t"]
 agent_max_climb = 0.5
@@ -1049,6 +1052,13 @@ transform = Transform3D(5.81682, 0, -3.89417, 0, 7, 0, 3.89417, 0, 5.81682, -11.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303072, 0, -0.0452704)
 id_hewan = null
 nama_kandang = null
+
+[node name="AreaKlik" type="Area3D" parent="Kandang-Kandang/kandang_anoa"]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.99999994, 0, 2.9802322e-08, 0, 1, 0, 0, 0)
+script = ExtResource("11_c5t2i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kandang-Kandang/kandang_anoa/AreaKlik"]
+shape = SubResource("SphereShape3D_c5t2i")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_lt30t")
