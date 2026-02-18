@@ -1,0 +1,26 @@
+{
+  "anoa": {
+    "pembuka": "Halo! Kita akan belajar tentang Anoa, hewan endemik Sulawesi.",
+    "fakta_1": "Anoa adalah kerbau terkecil di dunia. Tingginya hanya sekitar 1 meter!",
+    "fakta_2": "Mereka suka makan dedaunan, paku-pakuan, dan buah-buahan hutan.",
+    "fakta_3": "Sayangnya, Anoa terancam punah karena perburuan dan hilangnya habitat.",
+    "fakta_4": "Di Ragunan Zoo, kami merawat Anoa dengan baik dan melestarikan mereka.",
+    "penutup": "Jaga satwa Indonesia, ya!"
+  },
+  "harimau": {
+    "pembuka": "Sekarang kita bertemu Harimau Sumatera, si raja hutan!",
+    "fakta_1": "Harimau Sumatera adalah subspesies harimau terkecil di dunia.",
+    "fakta_2": "Mereka punya loreng yang lebih rapat dan gelap dari harimau lainnya.",
+    "fakta_3": "Populasinya tinggal kurang dari 400 ekor di alam liar.",
+    "fakta_4": "Harimau berperan penting menjaga keseimbangan ekosistem hutan.",
+    "penutup": "Stop perburuan liar, selamatkan harimau!"
+  },
+  "gajah": {
+    "pembuka": "Ini Gajah Sumatera, mamalia darat terbesar di Indonesia!",
+    "fakta_1": "Gajah Sumatera punya telinga lebih kecil dari gajah Afrika.",
+    "fakta_2": "Mereka bisa makan hingga 150 kg tumbuhan setiap hari!",
+    "fakta_3": "Gajah membantu menyebarkan biji-bijian di hutan.",
+    "fakta_4": "Sayangnya, konflik dengan manusia mengancam keberadaan mereka.",
+    "penutup": "Lindungi gajah dan habitatnya!"
+  }
+}

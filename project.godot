@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 AnimalData="*res://autoload/AnimalData.gd"
 AudioControl="*res://autoload/AudioControl.gd"
 SceneSwitcher="*res://autoload/SceneSwitcher.gd"
+NarasiData="*res://autoload/NarasiData.gd"
 
 [display]
 

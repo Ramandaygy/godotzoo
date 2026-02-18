@@ -45,5 +45,149 @@
 			"pilihan": ["5-6 meter", "3-4 meter", "2-3 meter", "1-2 meter"],
 			"jawaban_benar": 2
 		}
+	},
+
+	"binturong": {
+		"nama": "Binturong",
+		"nama_latin": "Arctictis binturong",
+		"habitat": "Hutan hujan tropis Sumatera, Kalimantan, dan Jawa",
+		"makanan": "Buah-buahan, dedaunan, telur, serangga kecil",
+		"fakta_menarik": "Binturong memiliki bau seperti popcorn karena kelenjar scent-nya mengeluarkan senyawa 2-acetyl-1-pyrroline.",
+		"status": "Rentan",
+		"narasi": "Ini adalah Binturong, mamalia unik yang sering disebut beruang kucing. Mereka adalah arboreal dan memiliki ekor prehensil untuk memanjat.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Bau apa yang dikeluarkan Binturong?",
+			"pilihan": ["Bau busuk", "Bau popcorn", "Bau wangi", "Tidak berbau"],
+			"jawaban_benar": 1
+		}
+	},
+
+	"kukang": {
+		"nama": "Kukang Jawa",
+		"nama_latin": "Nycticebus javanicus",
+		"habitat": "Hutan primer dan sekunder Jawa",
+		"makanan": "Nektar, getah pohon, serangga, buah-buahan",
+		"fakta_menarik": "Kukang memiliki gigitan berbisa! Mereka memiliki kelenjar di siku yang bisa menyebabkan alergi parah.",
+		"status": "Kritis",
+		"narasi": "Ini adalah Kukang Jawa, primata malam yang lucu tapi berbahaya. Mereka bergerak sangat lambat dan memiliki mata besar untuk melihat di malam hari.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Apa yang membuat gigitan Kukang berbahaya?",
+			"pilihan": ["Gigi tajam", "Kelenjar racun di siku", "Bibir beracun", "Air liur berbisa"],
+			"jawaban_benar": 1
+		}
+	},
+
+	"owajawa": {
+		"nama": "Owa Jawa",
+		"nama_latin": "Hylobates moloch",
+		"habitat": "Hutan hujan dataran rendah Jawa Barat dan Tengah",
+		"makanan": "Buah-buahan, daun muda, bunga, serangga",
+		"fakta_menarik": "Owa Jawa tidak memiliki ekor dan bisa berayun hingga 15 meter dengan satu lompatan menggunakan lengan panjangnya.",
+		"status": "Terancam Punah",
+		"narasi": "Ini adalah Owa Jawa, primata tanpa ekor yang sangat langka. Mereka terkenal dengan suara nyanyiannya yang indah di pagi hari.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Berapa jauh Owa Jawa bisa berayun dalam satu lompatan?",
+			"pilihan": ["5 meter", "10 meter", "15 meter", "20 meter"],
+			"jawaban_benar": 2
+		}
+	},
+
+	"kancil": {
+		"nama": "Kancil",
+		"nama_latin": "Tragulus spp.",
+		"habitat": "Hutan tropis Jawa, Sumatera, Kalimantan, dan Sulawesi",
+		"makanan": "Tumbuhan, jamur, buah-buahan jatuh",
+		"fakta_menarik": "Kancil adalah hewan berkuku genap terkecil di dunia dan memiliki taring seperti pemangsa meski pemakan tumbuhan.",
+		"status": "Rentan",
+		"narasi": "Ini adalah Kancil, hewan kecil yang cerdik dalam cerita rakyat. Mereka sangat pemalu dan aktif di malam hari.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Apa yang unik dari gigi Kancil?",
+			"pilihan": ["Gigi emas", "Taring seperti pemangsa", "Gigi tiga baris", "Tidak punya gigi"],
+			"jawaban_benar": 1
+		}
+	},
+
+	"tapir": {
+		"nama": "Tapir Asia",
+		"nama_latin": "Tapirus indicus",
+		"habitat": "Hutan hujan tropis Sumatera",
+		"makanan": "Daun muda, tunas, buah-buahan, air plants",
+		"fakta_menarik": "Tapir memiliki moncong seperti belalai pendek yang bisa digunakan untuk mengambil daun dan sebagai snorkel saat berenang.",
+		"status": "Terancam Punah",
+		"narasi": "Ini adalah Tapir Asia, mamalia besar yang mirip babi tapi kerabat kuda dan badak. Bayi tapir memiliki corak belang yang lucu!",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Fungsi moncong Tapir saat berenang?",
+			"pilihan": ["Menangkap ikan", "Sebagai snorkel", "Mengusir predator", "Menarik pasangan"],
+			"jawaban_benar": 1
+		}
+	},
+
+	"beruangmadu": {
+		"nama": "Beruang Madu",
+		"nama_latin": "Helarctos malayanus",
+		"habitat": "Hutan hujan tropis Sumatera dan Kalimantan",
+		"makanan": "Madu, serangga, buah-buahan, vertebrata kecil",
+		"fakta_menarik": "Beruang Madu memiliki lidah panjang 20-25 cm khusus untuk menjilat madu dari sarang lebah di dalam pohon.",
+		"status": "Rentan",
+		"narasi": "Ini adalah Beruang Madu, beruang terkecil di dunia. Mereka sangat jeli memanjat pohon untuk mencari madu dan serangga.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Berapa panjang lidah Beruang Madu?",
+			"pilihan": ["5-10 cm", "10-15 cm", "20-25 cm", "30-35 cm"],
+			"jawaban_benar": 2
+		}
+	},
+
+	"jalakbali": {
+		"nama": "Jalak Bali",
+		"nama_latin": "Leucopsar rothschildi",
+		"habitat": "Hutan monsun Bali Barat",
+		"makanan": "Serangga, buah-buahan, biji-bijian, nektar",
+		"fakta_menarik": "Jalak Bali hampir punah pada tahun 1990 dengan hanya 15 ekor tersisa, kini populasinya pulih menjadi ratusan.",
+		"status": "Rentan",
+		"narasi": "Ini adalah Jalak Bali, burung endemik cantik yang menjadi maskot Bali. Mereka memiliki jambul putih yang unik dan suara merdu.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Berapa ekor Jalak Bali tersisa pada tahun 1990?",
+			"pilihan": ["5 ekor", "15 ekor", "50 ekor", "100 ekor"],
+			"jawaban_benar": 1
+		}
+	},
+
+	"rangkong": {
+		"nama": "Rangkong Badak",
+		"nama_latin": "Buceros rhinoceros",
+		"habitat": "Hutan hujan tropis Sumatera, Kalimantan, dan Jawa",
+		"makanan": "Buah-buahan, serangga, reptil kecil",
+		"fakta_menarik": "Rangkong Badak memiliki casque (tanduk di paruh) yang bisa mencapai 1/3 panjang tubuhnya dan digunakan untuk resonansi suara.",
+		"status": "Rentan",
+		"narasi": "Ini adalah Rangkong Badak, burung besar dengan paruh berwarna-warni. Mereka memainkan peran penting menyebarkan biji pohon di hutan.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Fungsi casque (tanduk) pada Rangkong?",
+			"pilihan": ["Menyerang musuh", "Resonansi suara", "Menarik minat betina", "Semua benar"],
+			"jawaban_benar": 3
+		}
+	},
+
+	"kurakura": {
+		"nama": "Kura-kura Moncong Babi",
+		"nama_latin": "Carettochelys insculpta",
+		"habitat": "Sungai dan rawa Papua dan Papua Nugini",
+		"makanan": "Buah-buahan, daun, serangga, ikan kecil",
+		"fakta_menarik": "Kura-kura Moncong Babi adalah satu-satunya kura-kura air tawar yang memiliki sirip seperti penyu, bukan kaki berkuku.",
+		"status": "Rentan",
+		"narasi": "Ini adalah Kura-kura Moncong Babi, reptil unik dengan hidung seperti babi. Mereka bisa berenang dengan cepat menggunakan siripnya.",
+		"sudah_dikunjungi": false,
+		"kuis": {
+			"pertanyaan": "Apa yang membuat Kura-kura Moncong Babi unik?",
+			"pilihan": ["Bisa terbang", "Memiliki sirip seperti penyu", "Bisa berjalan tegak", "Berkulit berduri"],
+			"jawaban_benar": 1
+		}
 	}
 }

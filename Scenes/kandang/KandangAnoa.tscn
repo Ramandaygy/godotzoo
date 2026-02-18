@@ -1,11 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4ftnmhqirli8"]
+[gd_scene load_steps=10 format=3 uid="uid://b4ftnmhqirli8"]
 
 [ext_resource type="Script" uid="uid://cy6hft16hh51o" path="res://Scripts/kandang/kandangAnoa.gd" id="1_dxcep"]
 [ext_resource type="PackedScene" uid="uid://cn1c5j4vw1k3q" path="res://Assets/hewan/anoa.glb" id="1_itocg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxcep"]
-bg_color = Color(0.6, 0.6, 0.6, 0.3764706)
-border_color = Color(0.9607843, 0.7019608, 0.25882354, 1)
+bg_color = Color(0.7620216, 0.6369014, 0.4565243, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dxcep"]
+color = Color(0.4, 0.4, 0.4, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0uu1"]
+bg_color = Color(0.2, 0.33333334, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dxcep"]
+sky_top_color = Color(0.46485126, 1.2464644, 1.8834103, 1)
+sky_horizon_color = Color(0.44367492, 0.6929659, 0.8641208, 1)
+ground_bottom_color = Color(0.19756827, 0.31690994, 0.2801894, 1)
+ground_horizon_color = Color(0.19447815, 0.50556034, 0.3832984, 1)
+
+[sub_resource type="Sky" id="Sky_l0v4u"]
+sky_material = SubResource("ProceduralSkyMaterial_dxcep")
+
+[sub_resource type="Environment" id="Environment_r0uu1"]
+background_mode = 2
+sky = SubResource("Sky_l0v4u")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0v4u"]
+bg_color = Color(0.8677694, 0.76258445, 0.6138669, 0.76862746)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.41270024, 0.32917723, 0.2042326, 0.94509804)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.5676015, 0.45833212, 0.29858112, 0.94509804)
 
 [node name="KandangAnoa" type="Control"]
 layout_mode = 3
@@ -34,7 +74,7 @@ custom_minimum_size = Vector2(340, 600)
 layout_mode = 0
 offset_left = 791.0
 offset_right = 1165.0
-offset_bottom = 642.0
+offset_bottom = 651.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dxcep")
 
 [node name="JudulLabel" type="Label" parent="Panel"]
@@ -52,24 +92,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FotoHewan" type="TextureRect" parent="Panel"]
-custom_minimum_size = Vector2(600, 300)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 600.0
+offset_bottom = 300.0
 stretch_mode = 3
-
-[node name="deskripsi" type="RichTextLabel" parent="Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.045
-anchor_top = 0.16700001
-anchor_right = 0.99500006
-anchor_bottom = 0.734
-offset_left = 0.17000008
-offset_top = -0.21400452
-offset_right = -0.1300354
-offset_bottom = -0.22802734
-text = "Deskripsi"
 
 [node name="ButtonKuis" type="Button" parent="Panel"]
 layout_mode = 1
@@ -78,10 +105,10 @@ anchor_left = 0.56100005
 anchor_top = 0.84400004
 anchor_right = 0.91400003
 anchor_bottom = 0.933
-offset_left = 0.18597412
-offset_top = -5.8480225
-offset_right = 0.16400146
-offset_bottom = 0.013977051
+offset_left = -5.814026
+offset_top = -10.444031
+offset_right = -5.8359985
+offset_bottom = -4.5820313
 text = "QUIZ"
 
 [node name="ButtonAudio" type="Button" parent="Panel"]
@@ -93,25 +120,87 @@ offset_bottom = 602.0
 text = "suara
 hewan"
 
+[node name="InfoContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_right = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LatinLabel" type="Label" parent="Panel/InfoContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6666667, 0.6666667, 0.6666667, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/InfoContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_dxcep")
+
+[node name="DeskripsiSingkat" type="Label" parent="Panel/InfoContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/InfoContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="LabelHabitat" type="Label" parent="Panel/InfoContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ValueHabitat" type="Label" parent="Panel/InfoContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
+autowrap_mode = 2
+justification_flags = 162
+
+[node name="LabelMakanan" type="Label" parent="Panel/InfoContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ValueMakanan" type="Label" parent="Panel/InfoContainer/GridContainer"]
+layout_mode = 2
+
+[node name="LabelStatus" type="Label" parent="Panel/InfoContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ValueStatus" type="Label" parent="Panel/InfoContainer/GridContainer"]
+layout_mode = 2
+
+[node name="FaktaMenarik" type="RichTextLabel" parent="Panel/InfoContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_r0uu1")
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 custom_minimum_size = Vector2(803, 623)
 layout_mode = 0
 offset_right = 803.0
-offset_bottom = 636.0
+offset_bottom = 662.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-size = Vector2i(803, 636)
+handle_input_locally = false
+size = Vector2i(803, 662)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.86299896, 0, 0.5052056, 0, 1, 0, -0.5052056, 0, 0.86299896, 1.2521853, 0.546092, -1.0636392)
+transform = Transform3D(0.40888798, 0, 0.9125846, 0, 1, 0, -0.9125846, 0, 0.40888798, 1.2521853, 0.23733574, -0.42547107)
 current = true
 near = 0.1
 far = 100.0
 
 [node name="anoa" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_itocg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.0673113)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9377043)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport"]
 
@@ -119,6 +208,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.0673113)
 transform = Transform3D(0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
 light_energy = 1.5
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_r0uu1")
 
 [node name="ButtonKembali" type="Button" parent="."]
 layout_mode = 0
@@ -130,3 +222,22 @@ text = "kembali
 "
 
 [node name="AudioNarasi" type="AudioStreamPlayer" parent="."]
+
+[node name="NarasiPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 488.0
+offset_right = 755.0
+offset_bottom = 617.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l0v4u")
+
+[node name="NarasiTeks" type="RichTextLabel" parent="NarasiPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -2.0
+offset_right = 713.0
+offset_bottom = 127.0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
